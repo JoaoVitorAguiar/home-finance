@@ -9,10 +9,6 @@
     <PackageReference Include="WolverineFx" Version="5.9.2" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="UseCases\Persons\" />
-  </ItemGroup>
-
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>

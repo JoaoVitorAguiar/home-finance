@@ -17,4 +17,9 @@ public class PersonRepository(HomeFinanceDbContext dbContext) : IPersonRepositor
     {
         return dbContext.Persons.SingleOrDefaultAsync(p => p.Name == name);
     }
+
+    public Task<List<Person>> GetAllAsync()
+    {
+        return dbContext.Persons.ToListAsync();
+    }
 }
