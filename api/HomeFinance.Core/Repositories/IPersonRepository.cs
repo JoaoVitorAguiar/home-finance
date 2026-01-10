@@ -6,4 +6,5 @@ public interface IPersonRepository
 {
     Task CreateAsync(Person person);
     Task<Person?> GetByNameAsync(string name);
+    Task<List<Person>> GetAllAsync();
 }
