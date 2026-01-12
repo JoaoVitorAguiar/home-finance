@@ -14,9 +14,18 @@ public class Category : BaseEntity
         Description = description.Trim();
         Purpose = purpose;
     }
-    public bool CanBeUsedForExpense()
-        => Purpose is CategoryPurpose.Expense or CategoryPurpose.Both;
-    public bool CanBeUsedForIncome()
-        => Purpose is CategoryPurpose.Income or CategoryPurpose.Both;
+
+    public bool IsCompatibleWith(TransactionType type)
+    {
+        if (Purpose == CategoryPurpose.Both) return true;
+        switch (type)
+        {
+            case TransactionType.Expense when Purpose == CategoryPurpose.Expense:
+            case TransactionType.Income when Purpose == CategoryPurpose.Income:
+                return true;
+            default:
+                return false;
+        }
+    }
 
 }
