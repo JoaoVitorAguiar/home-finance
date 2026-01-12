@@ -19,6 +19,7 @@ public static class InfraModule
             ));
 
         services.AddScoped<IPersonRepository, PersonRepository>();
+        services.AddScoped<ICategoryRepository, CategoryRepository>();
 
         return services;
     }
