@@ -1,4 +1,4 @@
-namespace HomeFinance.Application.UseCases.ListCategoriesUseCase;
+namespace HomeFinance.Application.UseCases.Categories.ListCategoriesUseCase;
 
 public sealed record ListCategoriesResponse(
     int Id,
