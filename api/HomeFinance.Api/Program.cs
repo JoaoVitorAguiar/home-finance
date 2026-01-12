@@ -38,5 +38,6 @@ app.UseExceptionHandler();
 app.UseHttpsRedirection();
 
 app.MapPersonEndpoints();
+app.MapCategoryEndpoints();
 
 app.Run();
