@@ -1,4 +1,5 @@
 using HomeFinance.Application.UseCases.Categories.CreateCategoryUseCase;
+using HomeFinance.Application.UseCases.ListCategoriesUseCase;
 using Wolverine;
 
 namespace HomeFinance.Api.Endpoints;
@@ -19,6 +20,13 @@ public static class CategoryEndpoints
             .Produces(StatusCodes.Status201Created)
             .Produces(StatusCodes.Status400BadRequest)
             .Produces(StatusCodes.Status409Conflict);
-
+        
+        group.MapGet("/", async (IMessageBus bus) =>
+            {
+                var query = new ListCategoriesQuery();
+                var persons = await bus.InvokeAsync<List<ListCategoriesResponse>>(query);
+                return Results.Ok(persons);
+            })
+            .Produces<List<ListCategoriesResponse>>(StatusCodes.Status200OK);
     }
 }

@@ -20,6 +20,6 @@ public class PersonRepository(HomeFinanceDbContext dbContext) : IPersonRepositor
 
     public Task<List<Person>> GetAllAsync()
     {
-        return dbContext.Persons.ToListAsync();
+        return dbContext.Persons.AsNoTracking().ToListAsync();
     }
 }

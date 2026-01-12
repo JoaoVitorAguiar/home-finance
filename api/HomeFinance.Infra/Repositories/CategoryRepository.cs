@@ -17,4 +17,9 @@ public class CategoryRepository(HomeFinanceDbContext dbContext) : ICategoryRepos
     {
         return dbContext.Categories.SingleOrDefaultAsync(c => c.Description == description);
     }
+
+    public Task<List<Category>> GetAllAsync()
+    {
+        return dbContext.Categories.AsNoTracking().ToListAsync();
+    }
 }
