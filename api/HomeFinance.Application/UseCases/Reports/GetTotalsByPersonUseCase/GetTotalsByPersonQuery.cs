@@ -1,0 +1,3 @@
+namespace HomeFinance.Application.UseCases.Reports.GetTotalsByPersonUseCase;
+
+public record GetTotalsByPersonQuery;
