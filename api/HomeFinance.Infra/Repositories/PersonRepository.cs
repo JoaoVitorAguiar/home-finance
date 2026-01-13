@@ -13,6 +13,11 @@ public class PersonRepository(HomeFinanceDbContext dbContext) : IPersonRepositor
         await dbContext.SaveChangesAsync();
     }
 
+    public Task<Person?> GetByIdAsync(int id)
+    {
+        return dbContext.Persons.SingleOrDefaultAsync(p => p.Id == id);
+    }
+
     public Task<Person?> GetByNameAsync(string name)
     {
         return dbContext.Persons.SingleOrDefaultAsync(p => p.Name == name);

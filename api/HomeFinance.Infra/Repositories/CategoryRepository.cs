@@ -13,6 +13,11 @@ public class CategoryRepository(HomeFinanceDbContext dbContext) : ICategoryRepos
         await dbContext.SaveChangesAsync();
     }
 
+    public Task<Category?> GetByIdAsync(int id)
+    {
+        return dbContext.Categories.SingleOrDefaultAsync(c => c.Id == id);
+    }
+
     public Task<Category?> GetByDescriptionAsync(string description)
     {
         return dbContext.Categories.SingleOrDefaultAsync(c => c.Description == description);
