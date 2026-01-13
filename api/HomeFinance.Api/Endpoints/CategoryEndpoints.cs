@@ -1,5 +1,5 @@
 using HomeFinance.Application.UseCases.Categories.CreateCategoryUseCase;
-using HomeFinance.Application.UseCases.ListCategoriesUseCase;
+using HomeFinance.Application.UseCases.Categories.ListCategoriesUseCase;
 using Wolverine;
 
 namespace HomeFinance.Api.Endpoints;

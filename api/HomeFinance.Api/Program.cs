@@ -13,7 +13,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddOpenApi();
 builder.Services
     .AddExceptionHandler<ValidationExceptionHandler>()
+    .AddExceptionHandler<DomainExceptionHandler>()
     .AddExceptionHandler<GlobalExceptionHandler>();
+
 builder.Services.AddProblemDetails();
 
 builder.Host.UseWolverine(opts =>
@@ -39,5 +41,6 @@ app.UseHttpsRedirection();
 
 app.MapPersonEndpoints();
 app.MapCategoryEndpoints();
+app.MapTransactionEndpoints();
 
 app.Run();
