@@ -1,4 +1,6 @@
+using HomeFinance.Application.Common;
 using HomeFinance.Application.UseCases.Transactions.CreateTransactionUseCase;
+using HomeFinance.Application.UseCases.Transactions.ListTransactions;
 using Wolverine;
 
 namespace HomeFinance.Api.Endpoints;
@@ -20,5 +22,17 @@ public static class TransactionEndpoints
             .Produces(StatusCodes.Status400BadRequest)
             .Produces(StatusCodes.Status404NotFound)
             .Produces(StatusCodes.Status409Conflict);
+        
+        group.MapGet("/", async (
+                int page,
+                int pageSize,
+                IMessageBus bus) =>
+            {
+                var result = await bus.InvokeAsync<PagedResult<ListTransactionsResponse>>(
+                    new ListTransactionsQuery(page, pageSize));
+
+                return Results.Ok(result);
+            })
+            .Produces<PagedResult<ListTransactionsResponse>>(StatusCodes.Status200OK);
     }
 }
