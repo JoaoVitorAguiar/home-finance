@@ -1,6 +1,7 @@
+using HomeFinance.Application.UseCases.Categories.ListCategoriesUseCase;
 using HomeFinance.Core.Repositories;
 
-namespace HomeFinance.Application.UseCases.ListCategoriesUseCase;
+namespace HomeFinance.Application.UseCases.Categories.ListCategoriesUseCase;
 
 public static class ListCategoriesHandler
 {
