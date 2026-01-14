@@ -22,5 +22,6 @@ export function AppLayout() {
 function getTitleByPath(path: string) {
     if (path.startsWith("/categories")) return "Categories"
     if (path.startsWith("/people")) return "People"
+    if (path.startsWith("/transactions")) return "Transactions"
     return "Dashboard"
 }
