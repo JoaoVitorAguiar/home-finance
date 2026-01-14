@@ -1,6 +1,6 @@
 import { api } from "@/services/api"
 import type { Person } from "@/types/person"
-import type { CreatePersonInput } from "@/types/create-person.input.tscreate-person.input"
+import type { CreatePersonInput } from "@/types/person"
 
 
 

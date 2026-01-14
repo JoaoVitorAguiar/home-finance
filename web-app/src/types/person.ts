@@ -3,3 +3,8 @@ export type Person = {
     name: string
     age: number
 }
+
+export type CreatePersonInput = {
+    name: string
+    birthDate: string
+}
