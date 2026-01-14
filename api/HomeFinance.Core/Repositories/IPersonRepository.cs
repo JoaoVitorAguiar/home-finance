@@ -8,4 +8,5 @@ public interface IPersonRepository
     Task<Person?> GetByIdAsync(int id);
     Task<Person?> GetByNameAsync(string name);
     Task<List<Person>> GetAllAsync();
+    Task RemoveAsync(Person person);
 }

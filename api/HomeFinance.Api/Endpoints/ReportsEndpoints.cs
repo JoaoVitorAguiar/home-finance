@@ -16,7 +16,7 @@ public static class ReportsEndpoints
             var result = await bus.InvokeAsync<TotalsByPersonResponse>(query);
 
             return Results.Ok(result);
-        });
+        }).Produces<List<TotalsByPersonResponse>>(StatusCodes.Status200OK);
 
     }
 }

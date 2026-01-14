@@ -1,5 +1,6 @@
 using HomeFinance.Application.UseCases.Persons.CreatePersonUseCase;
 using HomeFinance.Application.UseCases.Persons.ListPersonsUseCase;
+using HomeFinance.Application.UseCases.Persons.RemovePersonUseCase;
 using HomeFinance.Core.Entities;
 using Wolverine;
 
@@ -23,7 +24,15 @@ public static class PersonEndpoints
                 var query = new ListPersonsQuery();
                 var persons = await bus.InvokeAsync<List<ListPersonsResponse>>(query);
                 return Results.Ok(persons);
-            })
-            .Produces<List<ListPersonsResponse>>(StatusCodes.Status200OK);
+            }).Produces<List<ListPersonsResponse>>(StatusCodes.Status200OK);
+
+        group.MapDelete("/{id:int}", async (int id, IMessageBus bus) =>
+        {
+            var command = new RemovePersonCommand(id);
+            await bus.InvokeAsync(command);
+            
+            return Results.NoContent();
+        });
+
     }
 }
