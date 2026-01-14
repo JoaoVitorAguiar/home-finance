@@ -27,4 +27,10 @@ public class PersonRepository(HomeFinanceDbContext dbContext) : IPersonRepositor
     {
         return dbContext.Persons.AsNoTracking().ToListAsync();
     }
+
+    public Task RemoveAsync(Person person)
+    {
+        dbContext.Persons.Remove(person);
+        return dbContext.SaveChangesAsync();
+    }
 }
