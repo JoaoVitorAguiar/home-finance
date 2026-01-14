@@ -13,7 +13,7 @@ public static class CreatePersListPersonsHandler
     {
         var persons = await personRepository.GetAllAsync();
         return persons
-            .Select(p => new ListPersonsResponse(p.Id, p.Name, p.BirthDate))
+            .Select(p => new ListPersonsResponse(p.Id, p.Name, p.Age))
             .ToList();
     }
 }
