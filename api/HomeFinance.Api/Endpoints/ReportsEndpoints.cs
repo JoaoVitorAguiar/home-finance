@@ -1,3 +1,4 @@
+using HomeFinance.Application.UseCases.Reports.GetTotalsByCategoryUseCase;
 using HomeFinance.Application.UseCases.Reports.GetTotalsByPersonUseCase;
 using Wolverine;
 
@@ -17,6 +18,13 @@ public static class ReportsEndpoints
 
             return Results.Ok(result);
         }).Produces<List<TotalsByPersonResponse>>(StatusCodes.Status200OK);
+        
+        group.MapGet("/by-category", async (IMessageBus bus) =>
+        {
+            var query = new GetTotalsByCategoryQuery();
+            var result = await bus.InvokeAsync<TotalsByCategoryResponse>(query);
 
+            return Results.Ok(result);
+        }).Produces<List<TotalsByCategoryResponse>>(StatusCodes.Status200OK);
     }
 }
