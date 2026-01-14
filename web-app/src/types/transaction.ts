@@ -8,11 +8,11 @@ export type TransactionListItem = {
     person: {
         id: number
         name: string
-    } | null
+    }
     category: {
         id: number
         description: string
-    } | null
+    }
     createdAt: string
 }
 
