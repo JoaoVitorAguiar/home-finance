@@ -12,3 +12,17 @@ export type TotalsByPersonResponse = {
     totalExpense: number
     balance: number
 }
+
+export type CategoryTotalsItem = {
+    categoryId: number
+    categoryDescription: string
+    totalIncome: number
+    totalExpense: number
+}
+
+export type TotalsByCategoryResponse = {
+    items: CategoryTotalsItem[]
+    totalIncome: number
+    totalExpense: number
+    balance: number
+}
