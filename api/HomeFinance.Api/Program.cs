@@ -27,7 +27,19 @@ builder.Host.UseWolverine(opts =>
 
 builder.Services.AddInfraModule(builder.Configuration);
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("web-app", b =>
+        b.WithOrigins(builder.Configuration.GetSection("AllowedOrigins").Get<string[]>()!)
+         .AllowCredentials()
+         .AllowAnyHeader()
+         .AllowAnyMethod()
+    );
+});
+
 var app = builder.Build();
+
+app.UseCors("web-app");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
