@@ -21,6 +21,7 @@ import type {
 import type { Category } from "@/types/category"
 import type { Person } from "@/types/person"
 import { Plus } from "lucide-react"
+import { formatCurrency, formatDateTime } from "@/lib/format"
 
 export default function Transactions() {
     const [transactionsPage, setTransactionsPage] = useState<PaginatedTransactions | null>(null)
@@ -68,15 +69,6 @@ export default function Transactions() {
         loadPage(page, pageSize)
     }, [page, pageSize])
 
-    function formatCurrency(value: number) {
-        return new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(value)
-    }
-
-    function formatDate(iso?: string) {
-        if (!iso) return "-"
-        const d = new Date(iso)
-        return d.toLocaleString("pt-BR", { dateStyle: "short", timeStyle: "short" })
-    }
 
     async function handleCreate() {
         if (!description || !amount || !type || !personId || !categoryId) return
@@ -232,7 +224,7 @@ export default function Transactions() {
 
                             return (
                                 <tr key={t.id} className="border-t">
-                                    <td className="p-3 align-top text-sm">{formatDate(t.createdAt)}</td>
+                                    <td className="p-3 align-top text-sm">{formatDateTime(t.createdAt)}</td>
                                     <td className="p-3 align-top">{t.description}</td>
                                     <td className="p-3 align-top text-sm">{t.person?.name ?? "-"}</td>
                                     <td className="p-3 align-top text-sm">{t.category?.description ?? "-"}</td>
