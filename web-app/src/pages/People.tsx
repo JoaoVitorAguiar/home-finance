@@ -13,12 +13,15 @@ import { Label } from "@/components/ui/label"
 import type { Person } from "@/types/person"
 import { PeopleService } from "@/services/people.service"
 import { birthDateFromAge } from "@/lib/date"
+import { toast } from "sonner"
 
 export default function People() {
     const [people, setPeople] = useState<Person[]>([])
     const [loading, setLoading] = useState(true)
     const [name, setName] = useState("")
     const [age, setAge] = useState("")
+    const [open, setOpen] = useState(false)
+
 
     async function loadPeople() {
         try {
@@ -31,17 +34,19 @@ export default function People() {
     }
 
     async function handleCreate() {
-        if (!name || !age) return
-
         const birthDate = birthDateFromAge(Number(age))
 
         await PeopleService.create({ name, birthDate })
 
         await loadPeople()
 
+        setOpen(false)
         setName("")
         setAge("")
+
+        toast.success("Person created successfully")
     }
+
 
     async function handleDelete(id: number) {
         await PeopleService.delete(id)
@@ -59,7 +64,7 @@ export default function People() {
     return (
         <div className="space-y-6">
             <div className="flex items-center justify-between">
-                <Dialog>
+                <Dialog open={open} onOpenChange={setOpen}>
                     <DialogTrigger asChild>
                         <Button className="gap-2">
                             <Plus className="w-4 h-4" />
