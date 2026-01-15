@@ -1,3 +1,4 @@
+import { notifyError } from "@/lib/notify"
 import axios from "axios"
 
 export const api = axios.create({
@@ -8,9 +9,9 @@ export const api = axios.create({
 })
 
 api.interceptors.response.use(
-    response => response,
-    error => {
-        console.error("API error:", error)
-        return Promise.reject(error)
+    res => res,
+    err => {
+        notifyError(err)
+        return Promise.reject(err)
     }
 )
