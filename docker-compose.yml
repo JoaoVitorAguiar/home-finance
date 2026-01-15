@@ -1,0 +1,61 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: homefinance_postgres
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}" ]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - "5432:5432"
+    volumes:
+      - homefinance_db:/var/lib/postgresql/data
+      - ./api/sql:/seed
+    networks:
+      - homefinance_net
+
+  api:
+    build:
+      context: ./api
+    image: homefinance_api
+    container_name: homefinance_api
+    environment:
+      ASPNETCORE_URLS: "http://+:8080"
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT}
+
+      ConnectionStrings__DefaultConnection: "Host=${DB_HOST};Port=5432;Database=${DB_NAME};Username=${DB_USER};Password=${DB_PASS}"
+
+      AllowedOrigins__0: "http://localhost:${WEB_PORT}"
+    ports:
+      - "${API_PORT}:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - homefinance_net
+
+  web:
+    build:
+      context: ./web-app
+    image: homefinance_web
+    container_name: homefinance_web
+    environment:
+      VITE_API_URL: "http://localhost:${API_PORT}"
+    ports:
+      - "${WEB_PORT}:3000"
+    depends_on:
+      - api
+    networks:
+      - homefinance_net
+
+networks:
+  homefinance_net:
+    driver: bridge
+
+volumes:
+  homefinance_db:

@@ -1,7 +1,9 @@
 using System.Reflection;
 using HomeFinance.Api.Endpoints;
 using HomeFinance.Api.Middlewares;
+using HomeFinance.Infra.Context;
 using HomeFinance.Infra.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
 using Wolverine;
 using Wolverine.FluentValidation;
@@ -55,5 +57,11 @@ app.MapPersonEndpoints();
 app.MapCategoryEndpoints();
 app.MapTransactionEndpoints();
 app.MapReportsEndpoints();
+
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<HomeFinanceDbContext>();
+    db.Database.Migrate();
+}
 
 app.Run();
