@@ -12,12 +12,15 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import type { Category, CategoryPurpose } from "@/types/category"
 import { CategoriesService } from "@/services/categories.service"
+import { toast } from "sonner"
 
 export default function Categories() {
     const [categories, setCategories] = useState<Category[]>([])
     const [loading, setLoading] = useState(true)
     const [description, setDescription] = useState("")
     const [purpose, setPurpose] = useState<CategoryPurpose>("Expense")
+    const [open, setOpen] = useState(false)
+
 
     async function loadCategories() {
         try {
@@ -30,13 +33,14 @@ export default function Categories() {
     }
 
     async function handleCreate() {
-        if (!description) return
-
         await CategoriesService.create({ description, purpose })
         await loadCategories()
 
+        setOpen(false)
         setDescription("")
         setPurpose("Expense")
+
+        toast.success("Category created successfully")
     }
 
     useEffect(() => {
@@ -50,7 +54,7 @@ export default function Categories() {
     return (
         <div className="space-y-6">
             <div className="flex items-center justify-between">
-                <Dialog>
+                <Dialog open={open} onOpenChange={setOpen}>
                     <DialogTrigger asChild>
                         <Button className="gap-2">
                             <Plus className="w-4 h-4" />

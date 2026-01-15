@@ -4,19 +4,25 @@ import { Dashboard } from "@/pages/Dashboard"
 import People from "@/pages/People"
 import Categories from "@/pages/Categories"
 import Transactions from "@/pages/Transactions"
+import { Toaster } from "sonner"
+
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route element={<AppLayout />}>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/people" element={<People />} />
-          <Route path="/categories" element={<Categories />} />
-          <Route path="/transactions" element={<Transactions />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route element={<AppLayout />}>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/people" element={<People />} />
+            <Route path="/categories" element={<Categories />} />
+            <Route path="/transactions" element={<Transactions />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+
+      <Toaster richColors position="top-right" />
+    </>
   )
 }

@@ -22,10 +22,13 @@ import type { Category } from "@/types/category"
 import type { Person } from "@/types/person"
 import { Plus } from "lucide-react"
 import { formatCurrency, formatDateTime } from "@/lib/format"
+import { toast } from "sonner"
 
 export default function Transactions() {
     const [transactionsPage, setTransactionsPage] = useState<PaginatedTransactions | null>(null)
     const [loading, setLoading] = useState(true)
+    const [open, setOpen] = useState(false)
+
 
     // create
     const [description, setDescription] = useState("")
@@ -88,6 +91,8 @@ export default function Transactions() {
         setPersonId("")
         setCategoryId("")
         setPage(1)
+        toast.success("Transaction created successfully")
+        setOpen(false)
         await loadPage(1, pageSize)
     }
 
@@ -107,7 +112,7 @@ export default function Transactions() {
                     </div>
                 </div>
 
-                <Dialog>
+                <Dialog open={open} onOpenChange={setOpen}>
                     <DialogTrigger asChild>
                         <Button className="gap-2">
                             <Plus className="w-4 h-4" />
