@@ -16,6 +16,7 @@ This project was developed focusing on **clean architecture, business rules, and
 * Categories management (Income, Expense, Both)
 * Financial transactions (income and expenses)
 * Dashboard with totals and reports
+* Interactive API documentation with Scalar
 * Reports by person
 * Reports by category (pie chart)
 * Business rules validation
@@ -57,6 +58,25 @@ The frontend is built with **React + Vite**, focusing on a clean UI and maintain
 * **Toast notifications** for feedback
 * **Dashboard with cards, tables and charts**
 * **Modular pages (People, Categories, Transactions, Dashboard)**
+
+---
+
+## 📑 API Documentation
+
+The API is fully documented using **Scalar**, providing an interactive and modern interface to explore endpoints, schemas, and test requests.
+
+After running the project, access:
+
+```
+http://localhost:5000/api/docs
+```
+
+Features of the API documentation:
+
+* Endpoint exploration
+* Request/response examples
+* Integrated testing interface
+* Automatic OpenAPI generation
 
 ---
 
