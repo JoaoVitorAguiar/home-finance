@@ -158,6 +158,29 @@ docker compose --env-file .env up --build
 
 ---
 
+## 🌱 Database Seed (Fake Data)
+
+The project provides a SQL seed file with **fake data** to quickly populate the database for testing and demo purposes.
+
+It inserts sample records for:
+
+* People
+* Categories
+* Transactions
+
+### ▶️ How to run the seed
+
+With the containers running, execute:
+
+```bash
+docker exec -it homefinance_postgres psql \
+  -U homefinance \
+  -d homefinance \
+  -f /seed/seed.sql
+```
+
+---
+
 ## 📂 Project Structure
 
 ```
